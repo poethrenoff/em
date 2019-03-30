@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><?= $this->escape($this->meta_title) ?></title>
+        <meta name="keywords" content="<?= $this->escape($this->meta_keywords) ?>"/>
+        <meta name="description" content="<?= $this->escape($this->meta_description) ?>"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="shortcut icon" href="/image/favicon.png" type="image/png">
+        <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    </head>
+    <body>
+        <div class="header">
+            <div class="wrapper">
+                <div class="left">
+<?= $this->path ?>
+                </div>
+                <div class="right">
+                    <a href="/">Елена Мошкова</a>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+<?= $this->content ?>
+        </div>
+        <div class="footer">
+            <div class="wrapper">
+                <div class="left">
+<?= $this->menu ?>
+                </div>
+                <div class="right">
+<?= $this->sidebar ?>
+                </div>
+            </div>
+        </div>
+<?= Adminko\View::block('block/counter') ?>
+    </body>
+</html>

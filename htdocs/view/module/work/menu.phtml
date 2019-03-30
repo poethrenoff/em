@@ -1,0 +1,8 @@
+<?php foreach ($this->group_tree->getChildren() as $group_item) { ?>
+<div class="tree">
+    <a href="<?= $group_item->getGroupUrl() ?>"><?= $this->escape($group_item->getGroupTitle()) ?></a><?php if ($group_item->getGroupComment()) { ?> (<?= $this->escape($group_item->getGroupComment()) ?>)<?php } ?><br/>
+<?php if ($group_item->hasChildren()) { ?>
+<?= Adminko\View::block('module/work/menu', array('group_tree' => $group_item, 'depth' => $this->depth + 1)) ?>
+<?php } ?>
+</div>
+<?php } ?>
