@@ -47,6 +47,10 @@ class Metadata
                 'work_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array('work_group')),
                 'work_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
             ),
+            'relations' => array(
+                'publication_work' => array('secondary_table' => 'publication', 'relation_table' => 'publication_work',
+                    'primary_field' => 'work_id', 'secondary_field' => 'publication_id'),
+            ),
         ),
         
         /**
@@ -77,12 +81,39 @@ class Metadata
                 'picture_title' => array( 'title' => 'Название', 'type' => 'string', 'errors' => array('require'), 'main' => 1),
                 'picture_image' => array('title' => 'Изображение', 'type' => 'file', 'upload_dir' => 'image', 'errors' => array('require')),
                 'picture_source' => array('title' => 'Исходник', 'type' => 'file', 'upload_dir' => 'image', 'errors' => array('require')),
-                'picture_date' => array('title' => 'Дата', 'type' => 'date', 'show' => true,    'errors' => array('require')),
+                'picture_date' => array('title' => 'Дата', 'type' => 'date', 'show' => true, 'errors' => array('require')),
                 'picture_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array('picture_date')),
                 'picture_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
             ),
         ),
-        
+
+        /**
+         * Таблица "Публикации"
+         */
+        'publication' => array(
+            'title' => 'Публикации',
+            'fields' => array(
+                'publication_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+                'publication_title' => array( 'title' => 'Название', 'type' => 'string', 'errors' => array('require'), 'main' => 1),
+                'publication_comment' => array( 'title' => 'Комментарий', 'type' => 'text' ),
+                'publication_date' => array('title' => 'Дата', 'type' => 'date', 'sort' => 'desc', 'show' => true, 'errors' => array('require')),
+                'publication_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
+            ),
+            'relations' => array(
+                'publication_work' => array('secondary_table' => 'work', 'relation_table' => 'publication_work',
+                    'primary_field' => 'publication_id', 'secondary_field' => 'work_id'),
+            ),
+        ),
+
+        'publication_work' => array(
+            'title' => 'Побликации произведений',
+            'internal' => true,
+            'fields' => array(
+                'publication_id' => array('title' => 'Публикация', 'type' => 'table', 'table' => 'publication', 'errors' => array('require')),
+                'work_id' => array('title' => 'Произведение', 'type' => 'table', 'table' => 'work', 'errors' => array('require')),
+            ),
+        ),
+
         ////////////////////////////////////////////////////////////////////////////////////////
         
         /**
